@@ -643,6 +643,78 @@
     }
     .contact-link:hover { color: var(--copper); border-color: var(--copper); }
 
+    /* CONTACT FORM */
+    .contact-form {
+      width: 100%;
+      max-width: 540px;
+      margin-top: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      text-align: left;
+    }
+
+    .contact-form label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: oklch(55% 0.01 70);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      background: oklch(24% 0.015 60);
+      border: 1px solid oklch(35% 0.012 60);
+      border-radius: 2px;
+      padding: 0.85rem 1rem;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: oklch(90% 0.01 70);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: oklch(45% 0.01 70); }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--copper); }
+
+    .contact-form textarea { resize: vertical; min-height: 130px; }
+
+    .contact-form button {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: oklch(90% 0.01 70);
+      border: none;
+      padding: 0.85rem 1.75rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .contact-form button:hover { background: var(--copper); color: #fff; }
+
+    .contact-form-success {
+      font-size: 0.9rem;
+      color: var(--copper);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      display: none;
+      margin-top: 0.5rem;
+    }
+
     /* FOOTER */
     footer {
       background: var(--bg-dark);
@@ -1112,6 +1184,23 @@
     <div class="contact-eyebrow reveal">Let's connect</div>
     <h2 class="contact-title reveal">Let's make<br><em>things happen.</em></h2>
     <p class="contact-sub reveal">I'm open to new opportunities, collaborations and conversations about digital services, product strategy and impact-driven development.</p>
+    <form class="contact-form reveal" id="contact-form" action="https://formspree.io/f/mojyrojj" method="POST">
+      <label>
+        Name
+        <input type="text" name="name" placeholder="Your name" required>
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" placeholder="your@email.com" required>
+      </label>
+      <label>
+        Message
+        <textarea name="message" placeholder="What's on your mind?" required></textarea>
+      </label>
+      <button type="submit">Send message →</button>
+      <p class="contact-form-success" id="form-success">Thank you — I'll be in touch soon.</p>
+    </form>
+
     <div class="contact-links reveal">
       <a class="contact-link" href="mailto:wilma.pietilainen@hotmail.com">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
@@ -1139,6 +1228,21 @@
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Contact form (Formspree AJAX)
+    const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(contactForm);
+      const res = await fetch(contactForm.action, {
+        method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        contactForm.reset();
+        formSuccess.style.display = 'block';
+      }
     });
 
     // Hamburger toggle

@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wilma Pietiläinen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: oklch(96% 0.012 75);
+      --bg-dark: oklch(18% 0.015 60);
+      --ink: oklch(22% 0.015 60);
+      --ink-soft: oklch(50% 0.012 60);
+      --copper: oklch(62% 0.12 55);
+      --copper-light: oklch(88% 0.04 55);
+      --rule: oklch(85% 0.015 70);
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', Helvetica, Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: oklch(96% 0.012 75 / 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-color: var(--rule); }
+
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--copper); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      padding: 0 3rem 5rem;
+      padding-top: 6rem;
+      gap: 4rem;
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 1rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      line-height: 1.05;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--copper);
+    }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      max-width: 42ch;
+      line-height: 1.65;
+      font-weight: 300;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 0.2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .hero-cta:hover { color: var(--copper); border-color: var(--copper); }
+    .hero-cta-arrow { transition: transform 0.2s; }
+    .hero-cta:hover .hero-cta-arrow { transform: translateX(4px); }
+
+    .hero-photo {
+      position: relative;
+      aspect-ratio: 3/4;
+      max-height: 80vh;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .hero-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--copper-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-photo-placeholder svg {
+      opacity: 0.3;
+    }
+
+    /* SECTION SHARED */
+    section {
+      padding: 7rem 3rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .section-number {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--copper);
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    hr.section-rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin-bottom: 4rem;
+    }
+
+    /* ABOUT */
+    #about {
+      background: var(--bg);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-aside {
+      position: sticky;
+      top: 7rem;
+    }
+
+    .about-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 0.75rem;
+    }
+
+    .about-aside-name {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      line-height: 1.15;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .about-contacts a {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .about-contacts a:hover { color: var(--copper); }
+
+    .about-body p {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--ink);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      text-wrap: pretty;
+    }
+
+    .about-body p:first-child {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    /* EXPERIENCE */
+    #experience {
+      background: var(--bg-dark);
+      color: oklch(90% 0.01 70);
+    }
+
+    #experience .section-title { color: oklch(95% 0.01 70); }
+    #experience .section-number { color: var(--copper); }
+    #experience hr.section-rule { border-color: oklch(35% 0.012 60); }
+
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 3rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid oklch(35% 0.012 60);
+      transition: background 0.2s;
+    }
+
+    .exp-meta {
+      padding-top: 0.2rem;
+    }
+
+    .exp-period {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--copper);
+      display: block;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+
+    .exp-company {
+      font-size: 0.85rem;
+      color: oklch(65% 0.01 70);
+      line-height: 1.4;
+    }
+
+    .exp-content {}
+
+    .exp-title {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: oklch(95% 0.01 70);
+      margin-bottom: 0.75rem;
+    }
+
+    .exp-desc {
+      font-size: 0.9rem;
+      color: oklch(72% 0.01 70);
+      line-height: 1.7;
+      font-weight: 300;
+      max-width: 65ch;
+    }
+
+    .exp-highlight {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--copper);
+      margin-top: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* SKILLS */
+    #skills {
+      background: var(--bg);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .skill-card {
+      padding: 2.5rem;
+      border: 1px solid var(--rule);
+      margin: -1px 0 0 -1px;
+    }
+
+    .skill-card:first-child { margin-left: 0; margin-top: 0; }
+
+    .skill-icon {
+      width: 2rem;
+      height: 2rem;
+      background: var(--copper-light);
+      border-radius: 50%;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .skill-name {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .skill-desc {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .skill-proof {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.78rem;
+      color: var(--copper);
+      font-weight: 500;
+      line-height: 1.55;
+    }
+
+    /* SPEAKING */
+    .talk-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .talk-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 3rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid oklch(35% 0.012 60);
+    }
+
+    .talk-meta {
+      padding-top: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .talk-year {
+      font-size: 1.8rem;
+      font-family: var(--serif);
+      color: var(--copper);
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .talk-venue {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: oklch(55% 0.01 70);
+    }
+
+    .talk-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 0.5rem;
+    }
+
+    .talk-title {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: oklch(95% 0.01 70);
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+    }
+
+    .talk-desc {
+      font-size: 0.88rem;
+      color: oklch(68% 0.01 70);
+      line-height: 1.7;
+      font-weight: 300;
+      max-width: 65ch;
+    }
+
+    /* PUBLICATIONS */
+    #publications {
+      background: var(--copper-light);
+    }
+
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .pub-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid oklch(78% 0.04 60);
+      gap: 2rem;
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.2s;
+    }
+    .pub-item:hover { color: var(--copper); }
+    .pub-item:hover .pub-arrow { transform: translateX(5px); }
+
+    .pub-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .pub-meta {
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .pub-arrow {
+      display: inline-block;
+      transition: transform 0.2s;
+      color: var(--copper);
+    }
+
+    /* EDUCATION */
+    #education {
+      background: var(--bg);
+    }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    .edu-card {
+      border-top: 2px solid var(--copper);
+      padding-top: 1.5rem;
+    }
+
+    .edu-year {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    .edu-degree {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-school {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      font-weight: 300;
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--bg-dark);
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 3rem;
+    }
+
+    .contact-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-title {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      font-weight: 400;
+      color: oklch(95% 0.01 70);
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+
+    .contact-title em {
+      font-style: italic;
+      color: var(--copper);
+    }
+
+    .contact-sub {
+      font-size: 1rem;
+      color: oklch(65% 0.01 70);
+      max-width: 48ch;
+      font-weight: 300;
+      margin-bottom: 3rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: oklch(90% 0.01 70);
+      text-decoration: none;
+      border-bottom: 1px solid oklch(40% 0.01 70);
+      padding-bottom: 0.25rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-link:hover { color: var(--copper); border-color: var(--copper); }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg-dark);
+      border-top: 1px solid oklch(28% 0.012 60);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-name {
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      color: oklch(55% 0.01 70);
+    }
+
+    .footer-langs {
+      font-size: 0.75rem;
+      color: oklch(45% 0.01 70);
+      letter-spacing: 0.08em;
+    }
+
+    /* LANGS strip */
+    .lang-strip {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .lang-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .lang-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+    }
+
+    .lang-level {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--copper);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* SCROLL FADE IN */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      #hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 2rem; }
+      .hero-photo { max-height: 50vh; order: -1; }
+      section { padding: 5rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-aside { position: static; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .talk-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .edu-grid { grid-template-columns: 1fr; gap: 2rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#hero" class="nav-name">Wilma Pietiläinen</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">CV</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#speaking">Speaking</a></li>
+      <li><a href="#publications">Featured In</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Portfolio — Wilma Pietiläinen</div>
+      <h1 class="hero-title">Strategy.<br><em>Empathy.</em><br>Action.</h1>
+      <p class="hero-tagline">Strategic doer with a Swiss army knife mindset. I lead digital projects that don't just get planned — they get delivered.</p>
+      <a href="#about" class="hero-cta">
+        Lue lisää <span class="hero-cta-arrow">→</span>
+      </a>
+    </div>
+    <div class="hero-photo">
+      <img src="https://pietilainen.wordpress.com/wp-content/uploads/2025/05/dettani-5265-ruokolainen-096-10x13-1.jpg"
+           alt="Wilma Pietiläinen"
+           onerror="this.style.display='none'; this.parentElement.querySelector('.hero-photo-placeholder').style.display='flex';">
+      <div class="hero-photo-placeholder" style="display:none; position:absolute; inset:0;">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="30" r="18" stroke="#7a5c45" stroke-width="1.5"/>
+          <path d="M8 76c0-17.673 14.327-32 32-32s32 14.327 32 32" stroke="#7a5c45" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header reveal">
+      <span class="section-number">01</span>
+      <h2 class="section-title">Hi, I'm Wilma</h2>
+    </div>
+    <hr class="section-rule">
+    <div class="about-grid">
+      <div class="about-aside reveal">
+        <div class="about-label">Get in touch</div>
+        <div class="about-aside-name">Wilma<br>Pietiläinen</div>
+        <div class="about-contacts">
+          <a href="https://www.linkedin.com/in/wilmapietilainen/" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="mailto:wilma.pietilainen@hotmail.com">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+            wilma.pietilainen@hotmail.com
+          </a>
+        </div>
+
+        <div class="lang-strip">
+          <div class="lang-item">
+            <span class="lang-name">Suomi</span>
+            <span class="lang-level">Äidinkieli</span>
+          </div>
+          <div class="lang-item">
+            <span class="lang-name">English</span>
+            <span class="lang-level">IELTS 8.0</span>
+          </div>
+          <div class="lang-item">
+            <span class="lang-name">Svenska</span>
+            <span class="lang-level">Working</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-body reveal">
+        <p>I connect the dots between business, technology and people — with a background spanning product development, service design, digital health, and regulatory environments.</p>
+        <p>I lead digital projects that don't just get planned, they get delivered. My colleagues say I'm the kind of person who brings order to chaos and occasionally resembles MacGyver (minus the mullet) — highly resourceful and innovative when it matters most.</p>
+        <p>My career began in nursing, where I learned the fundamentals of human-centred care and the open dialogue model. That foundation has shaped everything since: I build systems and services with the same careful attention to people that I once gave to patients.</p>
+        <p>I believe in meaningful work, trusted teams and practical impact built with heart — not just process.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header reveal">
+      <span class="section-number">02</span>
+      <h2 class="section-title">Experience</h2>
+    </div>
+    <hr class="section-rule">
+
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <span class="exp-period">01/2026 – Nyt</span>
+          <div class="exp-company">DigiFinland Oy</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-title">Offering Development Lead</div>
+          <p class="exp-desc">Shaping the strategic direction of DigiFinland's service offering in the health and social care sector through continuous market intelligence, competitive analysis and customer insight — turning signal into strategy. Driving the development of a national digital service portfolio by identifying white spaces, prioritising opportunities and building compelling value propositions. Leading structured innovation and idea management processes, facilitating co-creation with stakeholders and running opportunity assessments across incremental, breakthrough and disruptive horizons.</p>
+          <span class="exp-highlight">Strategy · Innovation management · Offering roadmap</span>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <span class="exp-period">09/2023 – 12/2025</span>
+          <div class="exp-company">DigiFinland Oy</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-title">Portfolio Lead</div>
+          <p class="exp-desc">Leading a national portfolio of digital health and wellbeing services, combining business architecture, product strategy and regulatory frameworks. Facilitated alignment across 7 multidisciplinary product teams and 20+ stakeholders. Building direction through OKRs, customer insight and strategic facilitation.</p>
+          <span class="exp-highlight">NPS improvement: −10 → +24</span>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <span class="exp-period">05/2023 – 08/2023</span>
+          <div class="exp-company">Qreform Oy</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-title">Customer Success Manager</div>
+          <p class="exp-desc">Translated complex regulatory and user needs into actionable service concepts. Owned and optimised customer-facing processes with a strong impact focus. Supported onboarding for 6 client organisations in 3 months.</p>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <span class="exp-period">02/2020 – 04/2023</span>
+          <div class="exp-company">DigiFinland Oy</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-title">Product Manager (Omaolo), PRRC</div>
+          <p class="exp-desc">Fast-tracked from specialist to product owner within two years. Led the strategic development of Omaolo, a nationally used MDR IIa regulated digital health service. Orchestrated over 20 successful product releases and managed a vendor ecosystem of 80+ experts.</p>
+          <span class="exp-highlight">20+ releases · 80-person ecosystem · MDR IIa compliance</span>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <span class="exp-period">05/2015 – 01/2019</span>
+          <div class="exp-company">Public Sector Health &amp; Social Services</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-title">Registered Nurse</div>
+          <p class="exp-desc">Facilitated 100+ rehabilitation sessions for mental health and substance recovery clients. Supported launch of 2 new service units. Applied the open dialogue model to support mental health recovery and trust-building with service users.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header reveal">
+      <span class="section-number">03</span>
+      <h2 class="section-title">Core Skills</h2>
+    </div>
+    <hr class="section-rule">
+
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a5c45" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
+        </div>
+        <div class="skill-name">Market Intelligence → Strategy</div>
+        <div class="skill-desc">I turn continuous market signals — competitive analysis, customer insight, sector trends — into coherent strategic direction. I identify white spaces before they become obvious and shape offerings that lead rather than follow.</div>
+        <div class="skill-proof">Shaping DigiFinland's national service offering strategy through structured market intelligence and opportunity mapping.</div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a5c45" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="skill-name">Offering &amp; Portfolio Development</div>
+        <div class="skill-desc">From value proposition design to portfolio coherence, I build service offerings that resonate with public sector clients and end users alike — balancing ambition with feasibility and regulation from day one.</div>
+        <div class="skill-proof">Led national digital health portfolio development across multiple product teams and service lines.</div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a5c45" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="skill-name">Structured Innovation Management</div>
+        <div class="skill-desc">I run idea management processes that distinguish signal from noise — assessing opportunities across incremental, breakthrough and disruptive horizons, and ensuring the best ideas reach production with speed and rigour.</div>
+        <div class="skill-proof">Facilitated co-creation workshops that moved a new digital service from idea to production in 9 months.</div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a5c45" stroke-width="2"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>
+        </div>
+        <div class="skill-name">Bridging Business, Tech &amp; Regulation</div>
+        <div class="skill-desc">My strength lies in making complex systems work together. I translate between business needs, technical realities and regulatory requirements — ensuring new services are viable, valuable and compliance-ready from the start.</div>
+        <div class="skill-proof">As PRRC for Omaolo: MDR IIa compliance across 20+ releases in a national health platform.</div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a5c45" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+        </div>
+        <div class="skill-name">Cross-Functional Alignment</div>
+        <div class="skill-desc">I bring product, business development and leadership together around a shared roadmap. I create conditions for decisions to be made with clarity — even when the direction is still emerging.</div>
+        <div class="skill-proof">Facilitated alignment across 7 product teams and 20+ stakeholders through OKRs and strategic facilitation.</div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a5c45" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="skill-name">Customer-Centric Value Creation</div>
+        <div class="skill-desc">I don't deliver what's asked — I clarify what's needed. Deep customer understanding is my compass: I gather insight, synthesise it into strategy and use it to build offerings that create lasting value for users and clients alike.</div>
+        <div class="skill-proof">Spearheaded a customer service redesign that shifted NPS from −10 to +24; contributed to a +34-point NPS shift overall.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPEAKING -->
+  <section id="speaking" style="background: var(--bg-dark);">
+    <div class="section-header reveal">
+      <span class="section-number">04</span>
+      <h2 class="section-title" style="color: oklch(95% 0.01 70);">Speaking &amp; Keynotes</h2>
+    </div>
+    <hr class="section-rule" style="border-color: oklch(35% 0.012 60);">
+
+    <p class="reveal" style="font-size:1.05rem; color: oklch(70% 0.01 70); font-weight:300; max-width:62ch; margin-bottom:4rem; line-height:1.75; text-wrap:pretty;">I speak at the intersection of digital health, national infrastructure and ethical innovation, bringing practitioner insight from the front lines of Finland's public sector transformation.</p>
+
+    <div class="talk-list">
+
+      <div class="talk-item reveal">
+        <div class="talk-meta">
+          <span class="talk-year">2026</span>
+          <span class="talk-venue">State of Brandenburg</span>
+        </div>
+        <div class="talk-content">
+          <div class="talk-tag">International Keynote</div>
+          <div class="talk-title">Built to Scale: How Finland Connected National Standards to Local Care</div>
+          <p class="talk-desc">An international keynote on Finland's model for building nationally coherent, locally responsive digital health infrastructure. Addressed how standardisation and interoperability can coexist with the granular realities of frontline care delivery.</p>
+        </div>
+      </div>
+
+      <div class="talk-item reveal">
+        <div class="talk-meta">
+          <span class="talk-year">2024</span>
+          <span class="talk-venue">TAMK</span>
+        </div>
+        <div class="talk-content">
+          <div class="talk-tag">Keynote</div>
+          <div class="talk-title">AI Decides — But on Whose Terms? Ethics and Patient Safety in the Age of Artificial Intelligence</div>
+          <p class="talk-desc">A provocation and a framework. Examined the uncomfortable gap between AI's promise and its accountability — exploring what ethical, regulation-ready AI looks like in clinical and social care contexts, and who bears responsibility when systems fail.</p>
+        </div>
+      </div>
+
+      <div class="talk-item reveal">
+        <div class="talk-meta">
+          <span class="talk-year">2023</span>
+          <span class="talk-venue">TAMK</span>
+        </div>
+        <div class="talk-content">
+          <div class="talk-tag">Alumni Keynote</div>
+          <div class="talk-title">National Development: What it takes to build services that work at scale</div>
+          <p class="talk-desc">On why the hardest part of national digital services is never the technology. A practitioner's view on navigating complexity, regulation and stakeholder ecosystems in Finnish public digital infrastructure.</p>
+        </div>
+      </div>
+
+      <div class="talk-item reveal">
+        <div class="talk-meta">
+          <span class="talk-year">2022</span>
+          <span class="talk-venue">TAMK</span>
+        </div>
+        <div class="talk-content">
+          <div class="talk-tag">Alumni Address</div>
+          <div class="talk-title">Career paths that resist straight lines — and why that's exactly the point</div>
+          <p class="talk-desc">A reflection on building expertise across the boundaries of healthcare, technology and strategy. Personal lessons on embracing non-linear careers as a source of strength, not uncertainty.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="reveal" style="margin-top:4rem; padding-top:3rem; border-top:1px solid oklch(35% 0.012 60); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;">
+      <p style="font-size:0.9rem; color:oklch(65% 0.01 70); font-weight:300; max-width:55ch;">Available for keynotes, panel discussions and expert contributions on digital health strategy, public sector innovation, AI ethics and regulatory frameworks.</p>
+      <a href="mailto:wilma.pietilainen@hotmail.com" class="hero-cta" style="color:oklch(90% 0.01 70); border-color:oklch(45% 0.01 70); white-space:nowrap;">Book a talk <span class="hero-cta-arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS / FEATURED IN -->
+  <section id="publications">
+    <div class="section-header reveal">
+      <span class="section-number">05</span>
+      <h2 class="section-title">Featured In</h2>
+    </div>
+    <hr class="section-rule" style="border-color: oklch(78% 0.04 60)">
+
+    <div class="pub-list">
+      <a class="pub-item reveal" href="https://ilkkapohjalainen.fi/yleisolta/omaolo-laittaa-turvallisuuden-aina-etusijalle" target="_blank">
+        <div class="pub-title">Ilkka-Pohjalainen: "Omaolo laittaa turvallisuuden aina etusijalle"</div>
+        <div class="pub-meta">
+          <span>23.1.2024</span>
+          <span class="pub-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="pub-item reveal" href="https://suomenkuvalehti.fi/uutisviikko/jopa-kolmasosa-hoitoalan-ammattilaisten-tyoajasta-menee-ei-hoidolliseen-tyohon-toisiko-tekoaly-satojen-miljoonien-saastot/" target="_blank">
+        <div class="pub-title">Suomen Kuvalehti: "Saako tekoäly vilkaista?"</div>
+        <div class="pub-meta">
+          <span>11.1.2024</span>
+          <span class="pub-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="pub-item reveal" href="https://digifinland.fi/blogi-saumattomien-palveluprosessien-ja-yhteentoimivuuden-asialla/" target="_blank">
+        <div class="pub-title">DigiFinland -blogi: "Saumattomien palveluprosessien ja yhteentoimivuuden asialla"</div>
+        <div class="pub-meta">
+          <span>1.11.2023</span>
+          <span class="pub-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="pub-item reveal" href="https://mimmitkoodaa.fi/author/wilma-pietilainen/" target="_blank">
+        <div class="pub-title">Mimmit koodaa -blogi</div>
+        <div class="pub-meta">
+          <span>2.2.2022</span>
+          <span class="pub-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="pub-item reveal" href="https://www.theseus.fi/handle/10024/336915" target="_blank">
+        <div class="pub-title">Master Thesis: Käyttäjälähtöinen Omaolo-verkkokoulutus terveydenhuollon ammattilaisille</div>
+        <div class="pub-meta">
+          <span>2020 · Thesis</span>
+          <span class="pub-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="pub-item reveal" href="https://www.theseus.fi/handle/10024/90946" target="_blank">
+        <div class="pub-title">Bachelor Thesis: Dialogisuus ryhmänohjauksessa</div>
+        <div class="pub-meta">
+          <span>2015 · Thesis</span>
+          <span class="pub-arrow">→</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-header reveal">
+      <span class="section-number">06</span>
+      <h2 class="section-title">Education</h2>
+    </div>
+    <hr class="section-rule">
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-year">2020</div>
+        <div class="edu-degree">Master of Wellbeing Technology</div>
+        <div class="edu-school">Tampere University of Applied Sciences</div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-year">2015</div>
+        <div class="edu-degree">Bachelor of Health Care</div>
+        <div class="edu-school">Tampere University of Applied Sciences</div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-year">2002</div>
+        <div class="edu-degree">Business Administration</div>
+        <div class="edu-school">Northern Pirkanmaa Educational Institute</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-eyebrow reveal">Otetaan yhteyttä</div>
+    <h2 class="contact-title reveal">Let's make<br><em>things happen.</em></h2>
+    <p class="contact-sub reveal">I'm open to new opportunities, collaborations and conversations about digital services, product strategy and impact-driven development.</p>
+    <div class="contact-links reveal">
+      <a class="contact-link" href="mailto:wilma.pietilainen@hotmail.com">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        Email
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/wilmapietilainen/" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/wilmapietilainen/details/recommendations/" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        References
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Wilma Pietiläinen</span>
+    <span class="footer-langs">FI · EN · SV</span>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

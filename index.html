@@ -706,6 +706,116 @@
     }
     .contact-form button:hover { background: var(--copper); color: #fff; }
 
+    /* TESTIMONIALS */
+    #testimonials {
+      background: var(--copper-light);
+      padding: 7rem 3rem;
+    }
+
+    .testimonial-carousel {
+      position: relative;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .testimonial-track {
+      overflow: hidden;
+    }
+
+    .testimonial-slide {
+      display: none;
+    }
+    .testimonial-slide.active {
+      display: block;
+    }
+
+    .testimonial-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--ink);
+      font-style: italic;
+      margin-bottom: 2rem;
+      position: relative;
+      padding-left: 1.75rem;
+    }
+
+    .testimonial-quote::before {
+      content: '\201C';
+      position: absolute;
+      left: 0;
+      top: -0.1em;
+      font-size: 2.5rem;
+      color: var(--copper);
+      font-style: normal;
+      line-height: 1;
+    }
+
+    .testimonial-controls {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .testimonial-btn {
+      width: 2.4rem;
+      height: 2.4rem;
+      border: 1px solid var(--copper);
+      background: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--copper);
+      transition: background 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+    .testimonial-btn:hover { background: var(--copper); color: #fff; }
+
+    .testimonial-dots {
+      display: flex;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .testimonial-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: oklch(72% 0.06 60);
+      transition: background 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+    .testimonial-dot.active {
+      background: var(--copper);
+      transform: scale(1.4);
+    }
+
+    .testimonial-linkedin {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-bottom: 1px solid oklch(70% 0.04 60);
+      padding-bottom: 0.2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .testimonial-linkedin:hover { color: var(--copper); border-color: var(--copper); }
+
+    @media (max-width: 900px) {
+      #testimonials { padding: 5rem 1.5rem; }
+      .testimonial-quote { font-size: 1.15rem; }
+    }
+
     .contact-form-success {
       font-size: 0.9rem;
       color: var(--copper);
@@ -812,6 +922,7 @@
     </button>
     <ul class="nav-links" id="nav-links">
       <li><a href="#about">About</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#experience">CV</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#speaking">Speaking</a></li>
@@ -890,10 +1001,68 @@
     </div>
   </section>
 
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="section-header reveal">
+      <span class="section-number">02</span>
+      <h2 class="section-title">What People Say</h2>
+    </div>
+    <hr class="section-rule" style="border-color: oklch(78% 0.04 60)">
+
+    <div class="testimonial-carousel reveal" id="testimonial-carousel">
+      <div class="testimonial-track">
+        <div class="testimonial-slide active">
+          <p class="testimonial-quote">Wilman kanssa yhteistyö synnyttää aina jotain enemmän kuin osasi odottaa. Luotettava osaaja, jolla pysyy langat käsissä.</p>
+        </div>
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">Wilma distills complex issues into clear, actionable insights. She excels at grasping the big picture while keeping a sharp focus on what matters most.</p>
+        </div>
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">Wilma combines creative problem-solving, clear decision-making, and an empathetic approach. Her ability to develop her team makes her a truly valuable leader.</p>
+        </div>
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">Wilma on yksi visionäärisimmistä ammattilaisista, joita olen tavannut. Hän kykenee viemään kehitystyön sekä strategiselle että operatiiviselle tasolle.</p>
+        </div>
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">Wilma on häkellyttävän tarkka erottamaan oleellisen epäoleellisesta. Hänen johtamistyylinsä rauhoittaa tekemistä myös kuumimmissa projektitilanteissa.</p>
+        </div>
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">Wilma has exceptional technical understanding and the ability to translate it into practical solutions. Her natural leadership consistently produces high-quality results.</p>
+        </div>
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">Wilma is never afraid to challenge existing processes with their own ideas. Working with her is a genuine pleasure.</p>
+        </div>
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">Wilma is your go-to person when a project needs to be handled efficiently, with sensitivity and modern values. Her passion for polishing the best version out of anything is unmatched.</p>
+        </div>
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">Wilma ymmärtää sekä liiketoiminnan tarpeet että teknisen toteutuksen realiteetit, mikä tekee hänestä poikkeuksellisen kumppanin monimutkaisissa digitalisaatiohankkeissa.</p>
+        </div>
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">Wilma combines strategic thinking with hands-on execution, and does so with an empathy and clarity that is genuinely rare.</p>
+        </div>
+      </div>
+
+      <div class="testimonial-controls">
+        <button class="testimonial-btn" id="t-prev" aria-label="Previous">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="testimonial-dots" id="t-dots"></div>
+        <button class="testimonial-btn" id="t-next" aria-label="Next">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <a class="testimonial-linkedin" href="https://www.linkedin.com/in/wilmapietilainen/details/recommendations/" target="_blank">
+        Read all recommendations on LinkedIn →
+      </a>
+    </div>
+  </section>
+
   <!-- EXPERIENCE -->
   <section id="experience">
     <div class="section-header reveal">
-      <span class="section-number">02</span>
+      <span class="section-number">03</span>
       <h2 class="section-title">Experience</h2>
     </div>
     <hr class="section-rule">
@@ -964,7 +1133,7 @@
   <!-- SKILLS -->
   <section id="skills">
     <div class="section-header reveal">
-      <span class="section-number">03</span>
+      <span class="section-number">04</span>
       <h2 class="section-title">Core Skills</h2>
     </div>
     <hr class="section-rule">
@@ -1029,7 +1198,7 @@
   <!-- SPEAKING -->
   <section id="speaking" style="background: var(--bg-dark);">
     <div class="section-header reveal">
-      <span class="section-number">04</span>
+      <span class="section-number">05</span>
       <h2 class="section-title" style="color: oklch(95% 0.01 70);">Speaking &amp; Keynotes</h2>
     </div>
     <hr class="section-rule" style="border-color: oklch(35% 0.012 60);">
@@ -1097,7 +1266,7 @@
   <!-- PUBLICATIONS / FEATURED IN -->
   <section id="publications">
     <div class="section-header reveal">
-      <span class="section-number">05</span>
+      <span class="section-number">06</span>
       <h2 class="section-title">Featured In</h2>
     </div>
     <hr class="section-rule" style="border-color: oklch(78% 0.04 60)">
@@ -1156,7 +1325,7 @@
   <!-- EDUCATION -->
   <section id="education">
     <div class="section-header reveal">
-      <span class="section-number">06</span>
+      <span class="section-number">07</span>
       <h2 class="section-title">Education</h2>
     </div>
     <hr class="section-rule">
@@ -1229,6 +1398,44 @@
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 40);
     });
+
+    // Testimonials carousel
+    (function () {
+      const slides = document.querySelectorAll('.testimonial-slide');
+      const dotsContainer = document.getElementById('t-dots');
+      const total = slides.length;
+      let current = 0;
+      let timer;
+
+      // Build dots
+      slides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        d.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(d);
+      });
+
+      function goTo(n) {
+        slides[current].classList.remove('active');
+        dotsContainer.children[current].classList.remove('active');
+        current = (n + total) % total;
+        slides[current].classList.add('active');
+        dotsContainer.children[current].classList.add('active');
+      }
+
+      function start() { timer = setInterval(() => goTo(current + 1), 5000); }
+      function stop()  { clearInterval(timer); }
+
+      document.getElementById('t-prev').addEventListener('click', () => { stop(); goTo(current - 1); start(); });
+      document.getElementById('t-next').addEventListener('click', () => { stop(); goTo(current + 1); start(); });
+
+      const carousel = document.getElementById('testimonial-carousel');
+      carousel.addEventListener('mouseenter', stop);
+      carousel.addEventListener('mouseleave', start);
+
+      start();
+    })();
 
     // Contact form (Formspree AJAX)
     const contactForm = document.getElementById('contact-form');

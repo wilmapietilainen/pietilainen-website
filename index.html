@@ -74,6 +74,32 @@
     }
     .nav-links a:hover { color: var(--copper); }
 
+    /* HAMBURGER */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 2rem;
+      height: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 101;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--ink);
+      transition: transform 0.3s, opacity 0.3s;
+      transform-origin: center;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
     /* HERO */
     #hero {
       min-height: 100vh;
@@ -679,8 +705,18 @@
     }
 
     @media (max-width: 900px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
+      nav { padding: 1.2rem 1.5rem; flex-wrap: wrap; }
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        padding: 0.5rem 0 1rem;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { border-top: 1px solid var(--rule); }
+      .nav-links a { display: block; padding: 0.75rem 0; font-size: 0.85rem; }
       #hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 2rem; }
       .hero-photo { max-height: 50vh; order: -1; }
       section { padding: 5rem 1.5rem; }
@@ -699,7 +735,10 @@
   <!-- NAV -->
   <nav id="nav">
     <a href="#hero" class="nav-name">Wilma Pietiläinen</a>
-    <ul class="nav-links">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#experience">CV</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -1100,6 +1139,20 @@
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Hamburger toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
     });
 
     // Reveal on scroll

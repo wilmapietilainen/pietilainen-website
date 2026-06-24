@@ -111,13 +111,31 @@
       gap: 4rem;
       position: relative;
       overflow: hidden;
+      background: #f4eee4;
     }
 
     #hero-canvas {
       position: absolute;
       inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
       z-index: 0;
       pointer-events: none;
+    }
+
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        rgba(244,238,228,0.82) 0%,
+        rgba(244,238,228,0.55) 38%,
+        rgba(244,238,228,0.10) 62%,
+        rgba(244,238,228,0.00) 100%
+      );
     }
 
     .hero-text {
@@ -126,7 +144,7 @@
       justify-content: flex-end;
       padding-bottom: 1rem;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     .hero-eyebrow {
@@ -181,7 +199,7 @@
 
     .hero-photo {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       aspect-ratio: 3/4;
       max-height: 80vh;
       overflow: hidden;
@@ -1000,6 +1018,7 @@
   <!-- HERO -->
   <section id="hero">
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-text">
       <div class="hero-eyebrow">Portfolio | Wilma Pietiläinen</div>
       <h1 class="hero-title">Strategy.<br><em>Empathy.</em><br>Action.</h1>
@@ -1545,108 +1564,97 @@
 
     reveals.forEach(el => observer.observe(el));
 
-    // Particle network canvas
+    // Converging Currents hero background
     (function () {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var canvas = document.getElementById('hero-canvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var section = document.getElementById('hero');
 
-      const canvas = document.getElementById('hero-canvas');
-      const ctx = canvas.getContext('2d');
-      const section = document.getElementById('hero');
+      var T = {
+        bgA: '#f4eee4',
+        bgB: '#e9e0d2',
+        line: [120, 104, 88],
+        copper: [168, 104, 64],
+        glow: [196, 132, 92],
+        baseOp: 0.12,
+        swell: 0.20,
+        copperBoost: 0.18,
+        glowOp: 0.12,
+      };
 
-      const CR = 185, CG = 130, CB = 75;
-      const CONNECT = 160;
+      var LINES = 22;
+      var w = 0, h = 0;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var animId = null;
 
-      let W, H, dpr, nodes = [], animId = null;
-      let mx = -9999, my = -9999;
+      function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
 
-      function nodeCount() { return window.innerWidth < 768 ? 24 : 42; }
-
-      function resize() {
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        const rect = section.getBoundingClientRect();
-        W = rect.width; H = rect.height;
-        canvas.width = W * dpr;
-        canvas.height = H * dpr;
-        canvas.style.width = W + 'px';
-        canvas.style.height = H + 'px';
-        ctx.scale(dpr, dpr);
-        nodes = Array.from({ length: nodeCount() }, () => ({
-          x: Math.random() * W,
-          y: Math.random() * H,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-        }));
+      function fit() {
+        var r = Math.min(window.devicePixelRatio || 1, 2);
+        w = canvas.clientWidth;
+        h = canvas.clientHeight;
+        canvas.width = Math.round(w * r);
+        canvas.height = Math.round(h * r);
+        ctx.setTransform(r, 0, 0, r, 0, 0);
       }
 
-      function tick() {
-        ctx.clearRect(0, 0, W, H);
+      function frame(t) {
+        var bg = ctx.createLinearGradient(0, 0, w, h);
+        bg.addColorStop(0, T.bgA);
+        bg.addColorStop(1, T.bgB);
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, w, h);
 
-        nodes.forEach(function (n) {
-          var dx = n.x - mx, dy = n.y - my;
-          var d = Math.sqrt(dx * dx + dy * dy);
-          if (d < 100 && d > 0) {
-            var f = (1 - d / 100) * 0.3;
-            n.vx += (dx / d) * f;
-            n.vy += (dy / d) * f;
-          }
-          var spd = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
-          if (spd > 0.55) { n.vx = n.vx / spd * 0.55; n.vy = n.vy / spd * 0.55; }
-          n.vx *= 0.999; n.vy *= 0.999;
-          n.x += n.vx; n.y += n.vy;
-          if (n.x < -8) n.x = W + 8;
-          if (n.x > W + 8) n.x = -8;
-          if (n.y < -8) n.y = H + 8;
-          if (n.y > H + 8) n.y = -8;
-        });
+        var cx = w * 0.72, cy = h * 0.5;
 
-        for (var i = 0; i < nodes.length; i++) {
-          for (var j = i + 1; j < nodes.length; j++) {
-            var dx = nodes[i].x - nodes[j].x;
-            var dy = nodes[i].y - nodes[j].y;
-            var d = Math.sqrt(dx * dx + dy * dy);
-            if (d < CONNECT) {
-              var a = ((1 - d / CONNECT) * 0.10).toFixed(3);
-              ctx.strokeStyle = 'rgba(' + CR + ',' + CG + ',' + CB + ',' + a + ')';
-              ctx.lineWidth = 0.7;
-              ctx.beginPath();
-              ctx.moveTo(nodes[i].x, nodes[i].y);
-              ctx.lineTo(nodes[j].x, nodes[j].y);
-              ctx.stroke();
-            }
+        for (var i = 0; i < LINES; i++) {
+          var f = i / (LINES - 1);
+          var baseY = h * (0.12 + f * 0.76);
+          var amp = (1 - Math.abs(f - 0.5) * 1.2) * h * 0.10 + 8;
+          var copper = i % 6 === 0;
+          ctx.beginPath();
+          for (var x = -20; x <= w + 20; x += 14) {
+            var conv = 1 - Math.min(1, Math.hypot(x - cx, baseY - cy) / (w * 0.7));
+            var squeeze = 1 - conv * 0.55;
+            var yMid = baseY + (cy - baseY) * conv * 0.5;
+            var k = x * 0.006;
+            var y = yMid
+              + Math.sin(k + t * 0.0006 + f * 5) * amp * squeeze
+              + Math.sin(k * 2.3 + t * 0.0009) * amp * 0.3 * squeeze;
+            if (x === -20) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
           }
+          var op = T.baseOp + (1 - Math.abs(f - 0.5) * 1.5) * T.swell;
+          ctx.strokeStyle = copper
+            ? rgba(T.copper, op + T.copperBoost)
+            : rgba(T.line, Math.max(0.05, op));
+          ctx.lineWidth = copper ? 1.4 : 0.8;
+          ctx.stroke();
         }
 
-        nodes.forEach(function (n) {
-          ctx.fillStyle = 'rgba(' + CR + ',' + CG + ',' + CB + ',0.20)';
-          ctx.beginPath();
-          ctx.arc(n.x, n.y, 1.8, 0, Math.PI * 2);
-          ctx.fill();
-        });
-
-        animId = requestAnimationFrame(tick);
+        var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, w * 0.30);
+        g.addColorStop(0, rgba(T.glow, T.glowOp));
+        g.addColorStop(1, rgba(T.glow, 0));
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(cx, cy, w * 0.30, 0, Math.PI * 2);
+        ctx.fill();
       }
 
-      function start() { if (!animId) tick(); }
+      function loop(t) { frame(t); animId = requestAnimationFrame(loop); }
+      function start() { if (!animId) animId = requestAnimationFrame(loop); }
       function stop()  { if (animId) { cancelAnimationFrame(animId); animId = null; } }
 
-      new IntersectionObserver(function (entries) {
-        entries[0].isIntersecting ? start() : stop();
-      }, { threshold: 0 }).observe(section);
+      fit();
+      window.addEventListener('resize', fit);
 
-      section.addEventListener('mousemove', function (e) {
-        var r = section.getBoundingClientRect();
-        mx = e.clientX - r.left;
-        my = e.clientY - r.top;
-      });
-      section.addEventListener('mouseleave', function () { mx = -9999; my = -9999; });
-
-      var resizeTimer;
-      window.addEventListener('resize', function () {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function () { stop(); resize(); start(); }, 150);
-      });
-
-      resize();
+      if (reduce) {
+        frame(0);
+      } else {
+        new IntersectionObserver(function (entries) {
+          entries[0].isIntersecting ? start() : stop();
+        }, { threshold: 0 }).observe(section);
+      }
     })();
   </script>
 </body>

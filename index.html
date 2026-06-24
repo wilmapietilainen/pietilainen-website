@@ -512,6 +512,7 @@
       border-top: 2px solid var(--copper);
       position: relative;
       overflow: hidden;
+      padding-bottom: 5.5rem;
     }
     .skill-card.skill-anchor .skill-desc,
     .skill-card.skill-anchor .skill-proof {
@@ -520,22 +521,17 @@
     .skill-card.skill-anchor .skill-proof {
       font-style: italic;
     }
-    /* Reuse of the hero Converging Currents animation, very faint, behind the text */
+    /* Reuse of the hero Converging Currents animation as a faint strip along the bottom edge, clear of the text */
     .anchor-canvas {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 72px;
       z-index: 0;
       pointer-events: none;
-    }
-    .anchor-scrim {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background: var(--bg);
-      opacity: 0.45;
+      -webkit-mask-image: linear-gradient(to top, #000 35%, transparent);
+      mask-image: linear-gradient(to top, #000 35%, transparent);
     }
     .skill-card.skill-anchor > .skill-icon,
     .skill-card.skill-anchor > .skill-name,
@@ -1367,7 +1363,6 @@
 
       <div class="skill-card skill-anchor reveal">
         <canvas id="ai-canvas" class="anchor-canvas" aria-hidden="true"></canvas>
-        <div class="anchor-scrim" aria-hidden="true"></div>
         <div class="skill-icon">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a5c45" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>
         </div>
@@ -1705,6 +1700,7 @@
         var drawGlow = opts.glow !== false;
         var opacityScale = opts.opacityScale == null ? 1 : opts.opacityScale;
         var mobileStatic = !!opts.mobileStatic;
+        var converge = opts.converge !== false;
 
         var T = {
           bgA: '#f4eee4',
@@ -1718,7 +1714,7 @@
           glowOp: 0.12,
         };
 
-        var LINES = 22;
+        var LINES = opts.lines || 22;
         var w = 0, h = 0;
         var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var animId = null;
@@ -1754,7 +1750,7 @@
             var copper = i % 6 === 0;
             ctx.beginPath();
             for (var x = -20; x <= w + 20; x += 14) {
-              var conv = 1 - Math.min(1, Math.hypot(x - cx, baseY - cy) / (w * 0.7));
+              var conv = converge ? (1 - Math.min(1, Math.hypot(x - cx, baseY - cy) / (w * 0.7))) : 0;
               var squeeze = 1 - conv * 0.55;
               var yMid = baseY + (cy - baseY) * conv * 0.5;
               var k = x * 0.006;
@@ -1809,12 +1805,14 @@
         glow: true,
       });
 
-      // AI anchor card: transparent, very faint, lighter on mobile
+      // AI anchor card: transparent strip along the bottom edge, fewer lines, lighter on mobile
       runCurrents(document.getElementById('ai-canvas'), {
         observe: document.querySelector('.skill-anchor'),
         fillBg: false,
         glow: false,
-        opacityScale: 0.6,
+        opacityScale: 0.9,
+        lines: 7,
+        converge: false,
         mobileStatic: true,
       });
     })();

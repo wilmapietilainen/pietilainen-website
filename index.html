@@ -177,8 +177,9 @@
     }
 
     @keyframes kenBurns {
-      from { transform: scale(1)    translate(0,    0); }
-      to   { transform: scale(1.06) translate(-1%, 0.5%); }
+      0%   { transform: scale(1.0); }
+      50%  { transform: scale(1.06); }
+      100% { transform: scale(1.0); }
     }
 
     .hero-photo img {
@@ -187,7 +188,8 @@
       object-fit: cover;
       object-position: top center;
       display: block;
-      animation: kenBurns 22s ease-in-out infinite alternate;
+      transform-origin: top center;
+      animation: kenBurns 28s ease-in-out infinite;
       will-change: transform;
     }
 

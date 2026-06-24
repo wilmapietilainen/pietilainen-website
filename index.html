@@ -176,12 +176,19 @@
       border-radius: 2px;
     }
 
+    @keyframes kenBurns {
+      from { transform: scale(1)    translate(0,    0); }
+      to   { transform: scale(1.06) translate(-1%, 0.5%); }
+    }
+
     .hero-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: top center;
       display: block;
+      animation: kenBurns 22s ease-in-out infinite alternate;
+      will-change: transform;
     }
 
     .hero-photo-placeholder {
@@ -320,8 +327,9 @@
       gap: 3rem;
       padding: 2.5rem 0;
       border-bottom: 1px solid oklch(35% 0.012 60);
-      transition: background 0.2s;
+      transition: background 0.25s;
     }
+    .exp-item:hover { background: oklch(22% 0.015 60); }
 
     .exp-meta {
       padding-top: 0.2rem;
@@ -385,7 +393,9 @@
       padding: 2.5rem;
       border: 1px solid var(--rule);
       margin: -1px 0 0 -1px;
+      transition: background 0.25s;
     }
+    .skill-card:hover { background: oklch(93% 0.014 75); }
 
     .skill-card:first-child { margin-left: 0; margin-top: 0; }
 
@@ -552,6 +562,11 @@
     .edu-card {
       border-top: 2px solid var(--copper);
       padding-top: 1.5rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .edu-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px oklch(0% 0 0 / 0.07);
     }
 
     .edu-year {
@@ -909,6 +924,16 @@
       .skills-grid { grid-template-columns: 1fr; }
       .edu-grid { grid-template-columns: 1fr; gap: 2rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+    /* REDUCED MOTION */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-photo img { animation: none; }
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .edu-card:hover { transform: none; box-shadow: none; }
     }
   </style>
 </head>

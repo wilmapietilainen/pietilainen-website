@@ -510,11 +510,71 @@
     .skill-card.skill-anchor {
       grid-column: 1 / -1;
       border-top: 2px solid var(--copper);
+      position: relative;
+      overflow: hidden;
     }
     .skill-card.skill-anchor .skill-desc,
     .skill-card.skill-anchor .skill-proof {
       max-width: 72ch;
     }
+    .skill-card.skill-anchor .skill-proof {
+      font-style: italic;
+    }
+    /* Reuse of the hero Converging Currents animation, very faint, behind the text */
+    .anchor-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .anchor-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: var(--bg);
+      opacity: 0.45;
+    }
+    .skill-card.skill-anchor > .skill-icon,
+    .skill-card.skill-anchor > .skill-name,
+    .skill-card.skill-anchor > .skill-desc,
+    .skill-card.skill-anchor > .skill-proof {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* AI IN PRACTICE */
+    #ai-practice .section-ingress {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      font-weight: 300;
+      max-width: 62ch;
+      margin-bottom: 4rem;
+      line-height: 1.75;
+      text-wrap: pretty;
+    }
+    #ai-practice .skill-proof {
+      font-style: italic;
+    }
+    #ai-practice .skill-proof a {
+      color: var(--copper);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: opacity 0.2s;
+    }
+    #ai-practice .skill-proof a:hover { opacity: 0.7; }
+    .ai-closer {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1.3;
+      font-weight: 400;
+      color: var(--ink);
+      max-width: 26ch;
+      margin-top: 4rem;
+    }
+    .ai-closer em { font-style: italic; color: var(--copper); }
 
     /* SPEAKING */
     .talk-list {
@@ -1033,6 +1093,7 @@
       <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#experience">CV</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#ai-practice">AI in Practice</a></li>
       <li><a href="#speaking">Speaking</a></li>
       <li><a href="#publications">Featured In</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -1305,20 +1366,55 @@
       </div>
 
       <div class="skill-card skill-anchor reveal">
+        <canvas id="ai-canvas" class="anchor-canvas" aria-hidden="true"></canvas>
+        <div class="anchor-scrim" aria-hidden="true"></div>
         <div class="skill-icon">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a5c45" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>
         </div>
         <div class="skill-name">Applied &amp; Responsible AI</div>
-        <div class="skill-desc">I use AI the way I would want any health professional to use a powerful tool: with skill and accountability. I design agents and workflows that sharpen analysis, accelerate synthesis and stress-test my own thinking, treating AI as an amplifier of judgement, never a replacement for it. And I hold it to the same standard as any regulated medical device: AI Act readiness, data protection and information security are where the work begins, not where it ends.</div>
-        <div class="skill-proof">Part of the working group that authored DigiFinland's ethical guidelines for the use of AI; a PRRC mindset applied to keeping AI accountable, compliant and trustworthy.</div>
+        <div class="skill-desc">I do not just advise on AI, I build with it, and I hold it to the same standard as any regulated medical device. Responsible use is the foundation everything else is built on.</div>
+        <div class="skill-proof">A PRRC mindset, hands-on building, and AI as a thinking partner.</div>
       </div>
     </div>
+  </section>
+
+  <!-- AI IN PRACTICE -->
+  <section id="ai-practice">
+    <div class="section-header reveal">
+      <span class="section-number">05</span>
+      <h2 class="section-title">AI in Practice</h2>
+    </div>
+    <hr class="section-rule">
+
+    <p class="reveal section-ingress">AI runs through how I work, but never as a replacement for judgement. I use it the way I would want any health professional to use a powerful tool: with skill, and with accountability. Responsible use is the foundation everything else is built on. The more capable the technology becomes, the more it matters that someone keeps it honest.</p>
+
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-name">Responsible by design</div>
+        <div class="skill-desc">Before AI is exciting, it has to be safe. I bring a PRRC mindset to it, holding AI to the same standard as any regulated medical device: AI Act readiness, data protection and information security are where the work begins, not where it ends. I care about who is accountable when a system gets it wrong, and I build that question into the work from the very start.</div>
+        <div class="skill-proof">Member of the working group that authored DigiFinland's ethical guidelines for the use of AI, and engaged in the global conversation on responsible AI in health through <a href="https://healthai.agency/cop/" target="_blank" rel="noopener noreferrer">HealthAI's international Community of Practice</a>.</div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-name">Hands-on, not hype</div>
+        <div class="skill-desc">I do not just advise on AI, I build with it. I design agents and workflows that take the repetitive weight off my work and free up time for the thinking that actually matters. The fastest way I come to understand a technology is to ship something real with it, so that is exactly what I do.</div>
+        <div class="skill-proof">Builds and operates custom AI agents and workflows to accelerate strategic work.</div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-name">AI as a thinking partner</div>
+        <div class="skill-desc">My most advanced use of AI is not automation, it is thinking. I have built my own strategic decision-support tool that runs complex questions through a set of deliberate reasoning filters, forcing multiple perspectives and actively countering cognitive bias before I commit to a view. AI does not make the decision for me; it makes my thinking sharper, broader and far harder to fool.</div>
+        <div class="skill-proof">Built a personal Executive Copilot that stress-tests complex decisions through structured reasoning filters.</div>
+      </div>
+    </div>
+
+    <p class="reveal ai-closer">Because in health and social care, regulation is not a final hurdle. <em>It is a launch pad.</em></p>
   </section>
 
   <!-- SPEAKING -->
   <section id="speaking" style="background: var(--bg-dark);">
     <div class="section-header reveal">
-      <span class="section-number">05</span>
+      <span class="section-number">06</span>
       <h2 class="section-title" style="color: oklch(95% 0.01 70);">Speaking &amp; Keynotes</h2>
     </div>
     <hr class="section-rule" style="border-color: oklch(35% 0.012 60);">
@@ -1386,7 +1482,7 @@
   <!-- PUBLICATIONS / FEATURED IN -->
   <section id="publications">
     <div class="section-header reveal">
-      <span class="section-number">06</span>
+      <span class="section-number">07</span>
       <h2 class="section-title">Featured In</h2>
     </div>
     <hr class="section-rule" style="border-color: oklch(78% 0.04 60)">
@@ -1445,7 +1541,7 @@
   <!-- EDUCATION -->
   <section id="education">
     <div class="section-header reveal">
-      <span class="section-number">07</span>
+      <span class="section-number">08</span>
       <h2 class="section-title">Education</h2>
     </div>
     <hr class="section-rule">
@@ -1598,97 +1694,129 @@
 
     reveals.forEach(el => observer.observe(el));
 
-    // Converging Currents hero background
+    // Converging Currents background, reused by the hero and the AI anchor card
     (function () {
-      var canvas = document.getElementById('hero-canvas');
-      if (!canvas) return;
-      var ctx = canvas.getContext('2d');
-      var section = document.getElementById('hero');
+      function runCurrents(canvas, opts) {
+        if (!canvas) return;
+        opts = opts || {};
+        var ctx = canvas.getContext('2d');
+        var observeTarget = opts.observe || canvas;
+        var fillBg = opts.fillBg !== false;
+        var drawGlow = opts.glow !== false;
+        var opacityScale = opts.opacityScale == null ? 1 : opts.opacityScale;
+        var mobileStatic = !!opts.mobileStatic;
 
-      var T = {
-        bgA: '#f4eee4',
-        bgB: '#e9e0d2',
-        line: [120, 104, 88],
-        copper: [168, 104, 64],
-        glow: [196, 132, 92],
-        baseOp: 0.12,
-        swell: 0.20,
-        copperBoost: 0.18,
-        glowOp: 0.12,
-      };
+        var T = {
+          bgA: '#f4eee4',
+          bgB: '#e9e0d2',
+          line: [120, 104, 88],
+          copper: [168, 104, 64],
+          glow: [196, 132, 92],
+          baseOp: 0.12,
+          swell: 0.20,
+          copperBoost: 0.18,
+          glowOp: 0.12,
+        };
 
-      var LINES = 22;
-      var w = 0, h = 0;
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var animId = null;
+        var LINES = 22;
+        var w = 0, h = 0;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var animId = null;
 
-      function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+        function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
 
-      function fit() {
-        var r = Math.min(window.devicePixelRatio || 1, 2);
-        w = canvas.clientWidth;
-        h = canvas.clientHeight;
-        canvas.width = Math.round(w * r);
-        canvas.height = Math.round(h * r);
-        ctx.setTransform(r, 0, 0, r, 0, 0);
-      }
-
-      function frame(t) {
-        var bg = ctx.createLinearGradient(0, 0, w, h);
-        bg.addColorStop(0, T.bgA);
-        bg.addColorStop(1, T.bgB);
-        ctx.fillStyle = bg;
-        ctx.fillRect(0, 0, w, h);
-
-        var cx = w * 0.72, cy = h * 0.5;
-
-        for (var i = 0; i < LINES; i++) {
-          var f = i / (LINES - 1);
-          var baseY = h * (0.12 + f * 0.76);
-          var amp = (1 - Math.abs(f - 0.5) * 1.2) * h * 0.10 + 8;
-          var copper = i % 6 === 0;
-          ctx.beginPath();
-          for (var x = -20; x <= w + 20; x += 14) {
-            var conv = 1 - Math.min(1, Math.hypot(x - cx, baseY - cy) / (w * 0.7));
-            var squeeze = 1 - conv * 0.55;
-            var yMid = baseY + (cy - baseY) * conv * 0.5;
-            var k = x * 0.006;
-            var y = yMid
-              + Math.sin(k + t * 0.0006 + f * 5) * amp * squeeze
-              + Math.sin(k * 2.3 + t * 0.0009) * amp * 0.3 * squeeze;
-            if (x === -20) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
-          }
-          var op = T.baseOp + (1 - Math.abs(f - 0.5) * 1.5) * T.swell;
-          ctx.strokeStyle = copper
-            ? rgba(T.copper, op + T.copperBoost)
-            : rgba(T.line, Math.max(0.05, op));
-          ctx.lineWidth = copper ? 1.4 : 0.8;
-          ctx.stroke();
+        function fit() {
+          var r = Math.min(window.devicePixelRatio || 1, 2);
+          w = canvas.clientWidth;
+          h = canvas.clientHeight;
+          canvas.width = Math.round(w * r);
+          canvas.height = Math.round(h * r);
+          ctx.setTransform(r, 0, 0, r, 0, 0);
         }
 
-        var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, w * 0.30);
-        g.addColorStop(0, rgba(T.glow, T.glowOp));
-        g.addColorStop(1, rgba(T.glow, 0));
-        ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.arc(cx, cy, w * 0.30, 0, Math.PI * 2);
-        ctx.fill();
+        function frame(t) {
+          if (fillBg) {
+            var bg = ctx.createLinearGradient(0, 0, w, h);
+            bg.addColorStop(0, T.bgA);
+            bg.addColorStop(1, T.bgB);
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, w, h);
+          } else {
+            ctx.clearRect(0, 0, w, h);
+          }
+
+          var cx = w * 0.72, cy = h * 0.5;
+
+          for (var i = 0; i < LINES; i++) {
+            var f = i / (LINES - 1);
+            var baseY = h * (0.12 + f * 0.76);
+            var amp = (1 - Math.abs(f - 0.5) * 1.2) * h * 0.10 + 8;
+            var copper = i % 6 === 0;
+            ctx.beginPath();
+            for (var x = -20; x <= w + 20; x += 14) {
+              var conv = 1 - Math.min(1, Math.hypot(x - cx, baseY - cy) / (w * 0.7));
+              var squeeze = 1 - conv * 0.55;
+              var yMid = baseY + (cy - baseY) * conv * 0.5;
+              var k = x * 0.006;
+              var y = yMid
+                + Math.sin(k + t * 0.0006 + f * 5) * amp * squeeze
+                + Math.sin(k * 2.3 + t * 0.0009) * amp * 0.3 * squeeze;
+              if (x === -20) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
+            }
+            var op = (T.baseOp + (1 - Math.abs(f - 0.5) * 1.5) * T.swell) * opacityScale;
+            ctx.strokeStyle = copper
+              ? rgba(T.copper, op + T.copperBoost * opacityScale)
+              : rgba(T.line, Math.max(0.04, op));
+            ctx.lineWidth = copper ? 1.4 : 0.8;
+            ctx.stroke();
+          }
+
+          if (drawGlow) {
+            var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, w * 0.30);
+            g.addColorStop(0, rgba(T.glow, T.glowOp * opacityScale));
+            g.addColorStop(1, rgba(T.glow, 0));
+            ctx.fillStyle = g;
+            ctx.beginPath();
+            ctx.arc(cx, cy, w * 0.30, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        function loop(t) { frame(t); animId = requestAnimationFrame(loop); }
+        function start() { if (!animId) animId = requestAnimationFrame(loop); }
+        function stop()  { if (animId) { cancelAnimationFrame(animId); animId = null; } }
+
+        fit();
+        window.addEventListener('resize', function () {
+          fit();
+          if (!animId) frame(0);
+        });
+
+        var isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (reduce || (mobileStatic && isMobile)) {
+          frame(0);
+        } else {
+          new IntersectionObserver(function (entries) {
+            entries[0].isIntersecting ? start() : stop();
+          }, { threshold: 0 }).observe(observeTarget);
+        }
       }
 
-      function loop(t) { frame(t); animId = requestAnimationFrame(loop); }
-      function start() { if (!animId) animId = requestAnimationFrame(loop); }
-      function stop()  { if (animId) { cancelAnimationFrame(animId); animId = null; } }
+      // Hero: full opaque background with glow (unchanged behaviour)
+      runCurrents(document.getElementById('hero-canvas'), {
+        observe: document.getElementById('hero'),
+        fillBg: true,
+        glow: true,
+      });
 
-      fit();
-      window.addEventListener('resize', fit);
-
-      if (reduce) {
-        frame(0);
-      } else {
-        new IntersectionObserver(function (entries) {
-          entries[0].isIntersecting ? start() : stop();
-        }, { threshold: 0 }).observe(section);
-      }
+      // AI anchor card: transparent, very faint, lighter on mobile
+      runCurrents(document.getElementById('ai-canvas'), {
+        observe: document.querySelector('.skill-anchor'),
+        fillBg: false,
+        glow: false,
+        opacityScale: 0.6,
+        mobileStatic: true,
+      });
     })();
   </script>
 </body>

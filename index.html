@@ -1635,7 +1635,7 @@
         dotsContainer.children[current].classList.add('active');
       }
 
-      function start() { timer = setInterval(() => goTo(current + 1), 5000); }
+      function start() { timer = setInterval(() => goTo(current + 1), 11000); }
       function stop()  { clearInterval(timer); }
 
       document.getElementById('t-prev').addEventListener('click', () => { stop(); goTo(current - 1); start(); });

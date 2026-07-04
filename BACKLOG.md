@@ -6,14 +6,7 @@ Priorisoidut kehityskohteet, arvioitu 4.7.2026. Päivitä tätä listaa kun koht
 
 - [x] Tietoturva: paljastuneet tokenit peruttu, tunnistautuminen Keychainin kautta, ei tokeneita URL:eissa (4.7.2026)
 - [x] Tietoturva: repo siirretty pois Downloads-kansiosta omaan kansioonsa, .gitignore lisätty (4.7.2026)
-
-## 1. Näkyvyyspaketti (SEO ja jako)
-
-- [ ] Meta description ja Open Graph/Twitter Card -tagit (LinkedIn-jaon esikatselu: otsikko, kuvaus, kuva)
-- [ ] Kuvaavampi title, esim. "Wilma Pietiläinen | Digital Health & AI Strategy"
-- [ ] Favicon (esim. WP-monogrammi kuparilla) ja apple-touch-icon
-- [ ] photo.png (1,6 Mt) muunnos WebP-muotoon, tavoite noin 0,2 Mt; width/height-attribuutit img-tagiin
-- [ ] rel="noopener noreferrer" kaikkiin target="_blank"-linkkeihin (11 kpl puuttuu)
+- [x] Näkyvyyspaketti: meta description, Open Graph/Twitter Card -tagit, uusi title, favicon.png ja apple-touch-icon (WP-monogrammi kuparilla), photo.webp (46 kt, oli 1,6 Mt PNG) width/height-attribuuteilla, og-image.jpg jakoesikatseluun, rel="noopener noreferrer" kaikkiin target="_blank"-linkkeihin (4.7.2026)
 
 ## 2. Saavutettavuuskierros
 

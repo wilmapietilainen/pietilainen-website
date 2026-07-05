@@ -18,6 +18,37 @@
   <meta name="twitter:title" content="Wilma Pietiläinen | Digital Health &amp; AI Strategy">
   <meta name="twitter:description" content="Wilma Pietiläinen leads digital health and AI projects from strategy to delivery, with a background in nursing, service design and responsible AI.">
   <meta name="twitter:image" content="https://wilmapietilainen.com/og-image.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Wilma Pietiläinen",
+    "url": "https://wilmapietilainen.com/",
+    "image": "https://wilmapietilainen.com/og-image.jpg",
+    "jobTitle": "Offering Development Lead",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "DigiFinland Oy"
+    },
+    "email": "mailto:wilma.pietilainen@hotmail.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/wilmapietilainen/"
+    ],
+    "knowsLanguage": ["fi", "en", "sv"],
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Tampere University of Applied Sciences"
+    },
+    "knowsAbout": [
+      "Digital health",
+      "AI strategy",
+      "Responsible AI",
+      "Service design",
+      "Product management",
+      "Healthcare regulation"
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -579,7 +610,7 @@
     }
 
     /* AI IN PRACTICE */
-    #ai-practice .section-ingress {
+    .section-ingress {
       font-size: 1.05rem;
       color: var(--ink-soft);
       font-weight: 300;
@@ -610,6 +641,35 @@
     .ai-closer em { font-style: italic; color: var(--copper); }
 
     /* SPEAKING */
+    .section-dark { background: var(--bg-dark); }
+    .section-dark .section-title { color: oklch(95% 0.01 70); }
+    .section-dark hr.section-rule { border-color: oklch(35% 0.012 60); }
+    .section-dark .section-ingress { color: oklch(70% 0.01 70); }
+
+    .speaking-cta {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid oklch(35% 0.012 60);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .speaking-cta p {
+      font-size: 0.9rem;
+      color: oklch(65% 0.01 70);
+      font-weight: 300;
+      max-width: 55ch;
+    }
+
+    .speaking-cta .hero-cta {
+      color: oklch(90% 0.01 70);
+      border-color: oklch(45% 0.01 70);
+      white-space: nowrap;
+    }
+
     .talk-list {
       display: flex;
       flex-direction: column;
@@ -1416,7 +1476,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a5c45" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>
         </div>
         <div class="skill-name">Applied &amp; Responsible AI</div>
-        <div class="skill-desc">I do not just advise on AI, I build with it, and I hold it to the same standard as any regulated medical device. Responsible use is the foundation everything else is built on.</div>
+        <div class="skill-desc">I do not just advise on AI, I build with it, and I hold it to the same standard as any regulated medical device.</div>
         <div class="skill-proof">A PRRC mindset, hands-on building, and AI as a thinking partner.</div>
       </div>
     </div>
@@ -1456,14 +1516,14 @@
   </section>
 
   <!-- SPEAKING -->
-  <section id="speaking" style="background: var(--bg-dark);">
+  <section id="speaking" class="section-dark">
     <div class="section-header reveal">
       <span class="section-number">06</span>
-      <h2 class="section-title" style="color: oklch(95% 0.01 70);">Speaking &amp; Keynotes</h2>
+      <h2 class="section-title">Speaking &amp; Keynotes</h2>
     </div>
-    <hr class="section-rule" style="border-color: oklch(35% 0.012 60);">
+    <hr class="section-rule">
 
-    <p class="reveal" style="font-size:1.05rem; color: oklch(70% 0.01 70); font-weight:300; max-width:62ch; margin-bottom:4rem; line-height:1.75; text-wrap:pretty;">I speak at the intersection of digital health, national infrastructure and ethical AI, bringing practitioner insight from the front lines of Finland's public sector transformation.</p>
+    <p class="reveal section-ingress">I speak at the intersection of digital health, national infrastructure and ethical AI, bringing practitioner insight from the front lines of Finland's public sector transformation.</p>
 
     <div class="talk-list">
 
@@ -1517,9 +1577,9 @@
 
     </div>
 
-    <div class="reveal" style="margin-top:4rem; padding-top:3rem; border-top:1px solid oklch(35% 0.012 60); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;">
-      <p style="font-size:0.9rem; color:oklch(65% 0.01 70); font-weight:300; max-width:55ch;">Available for keynotes, panel discussions and expert contributions on digital health strategy, public sector innovation, AI ethics and regulatory frameworks.</p>
-      <a href="mailto:wilma.pietilainen@hotmail.com" class="hero-cta" style="color:oklch(90% 0.01 70); border-color:oklch(45% 0.01 70); white-space:nowrap;">Book a talk <span class="hero-cta-arrow">→</span></a>
+    <div class="reveal speaking-cta">
+      <p>Available for keynotes, panel discussions and expert contributions on digital health strategy, public sector innovation, AI ethics and regulatory frameworks.</p>
+      <a href="mailto:wilma.pietilainen@hotmail.com" class="hero-cta">Book a talk <span class="hero-cta-arrow">→</span></a>
     </div>
   </section>
 
@@ -1657,11 +1717,14 @@
 
   <!-- FOOTER -->
   <footer>
-    <span class="footer-name">Wilma Pietiläinen</span>
+    <span class="footer-name">© <span id="footer-year">2026</span> Wilma Pietiläinen</span>
     <span class="footer-langs">FI · EN · SV</span>
   </footer>
 
   <script>
+    // Footer copyright year
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
     // Nav scroll effect
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {

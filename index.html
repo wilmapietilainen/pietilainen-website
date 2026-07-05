@@ -38,6 +38,9 @@
 
     html { scroll-behavior: smooth; }
 
+    /* Keep anchor targets clear of the fixed nav */
+    section[id] { scroll-margin-top: 5rem; }
+
     body {
       background: var(--bg);
       color: var(--ink);
@@ -46,6 +49,26 @@
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
+
+    /* SKIP LINK */
+    .skip-link {
+      position: fixed;
+      top: -100%;
+      left: 1rem;
+      z-index: 200;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 2px;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    #hero:focus { outline: none; }
 
     /* NAV */
     nav {
@@ -991,6 +1014,15 @@
       margin-top: 0.5rem;
     }
 
+    .contact-form-error {
+      font-size: 0.9rem;
+      color: oklch(72% 0.16 30);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      display: none;
+      margin-top: 0.5rem;
+    }
+
     /* FOOTER */
     footer {
       background: var(--bg-dark);
@@ -1092,10 +1124,12 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#hero">Skip to content</a>
+
   <!-- NAV -->
   <nav id="nav">
     <a href="#hero" class="nav-name">Wilma Pietiläinen</a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="nav-links">
@@ -1111,7 +1145,7 @@
   </nav>
 
   <!-- HERO -->
-  <section id="hero">
+  <section id="hero" tabindex="-1">
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-text">
@@ -1193,9 +1227,9 @@
     <hr class="section-rule" style="border-color: oklch(78% 0.04 60)">
 
     <div class="testimonial-carousel reveal" id="testimonial-carousel">
-      <div class="testimonial-track">
+      <div class="testimonial-track" aria-live="polite">
         <div class="testimonial-slide active">
-          <p class="testimonial-quote">Wilman kanssa yhteistyö synnyttää aina jotain enemmän kuin osasi odottaa. Luotettava osaaja, jolla pysyy langat käsissä.</p>
+          <p class="testimonial-quote" lang="fi">Wilman kanssa yhteistyö synnyttää aina jotain enemmän kuin osasi odottaa. Luotettava osaaja, jolla pysyy langat käsissä.</p>
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-quote">Wilma distills complex issues into clear, actionable insights. She excels at grasping the big picture while keeping a sharp focus on what matters most.</p>
@@ -1204,10 +1238,10 @@
           <p class="testimonial-quote">Wilma combines creative problem-solving, clear decision-making, and an empathetic approach. Her ability to develop her team makes her a truly valuable leader.</p>
         </div>
         <div class="testimonial-slide">
-          <p class="testimonial-quote">Wilma on yksi visionäärisimmistä ammattilaisista, joita olen tavannut. Hän kykenee viemään kehitystyön sekä strategiselle että operatiiviselle tasolle.</p>
+          <p class="testimonial-quote" lang="fi">Wilma on yksi visionäärisimmistä ammattilaisista, joita olen tavannut. Hän kykenee viemään kehitystyön sekä strategiselle että operatiiviselle tasolle.</p>
         </div>
         <div class="testimonial-slide">
-          <p class="testimonial-quote">Wilma on häkellyttävän tarkka erottamaan oleellisen epäoleellisesta. Hänen johtamistyylinsä rauhoittaa tekemistä myös kuumimmissa projektitilanteissa.</p>
+          <p class="testimonial-quote" lang="fi">Wilma on häkellyttävän tarkka erottamaan oleellisen epäoleellisesta. Hänen johtamistyylinsä rauhoittaa tekemistä myös kuumimmissa projektitilanteissa.</p>
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-quote">Wilma has exceptional technical understanding and the ability to translate it into practical solutions. Her natural leadership consistently produces high-quality results.</p>
@@ -1219,7 +1253,7 @@
           <p class="testimonial-quote">Wilma is your go-to person when a project needs to be handled efficiently, with sensitivity and modern values. Her passion for polishing the best version out of anything is unmatched.</p>
         </div>
         <div class="testimonial-slide">
-          <p class="testimonial-quote">Wilma ymmärtää sekä liiketoiminnan tarpeet että teknisen toteutuksen realiteetit, mikä tekee hänestä poikkeuksellisen kumppanin monimutkaisissa digitalisaatiohankkeissa.</p>
+          <p class="testimonial-quote" lang="fi">Wilma ymmärtää sekä liiketoiminnan tarpeet että teknisen toteutuksen realiteetit, mikä tekee hänestä poikkeuksellisen kumppanin monimutkaisissa digitalisaatiohankkeissa.</p>
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-quote">Wilma combines strategic thinking with hands-on execution, and does so with an empathy and clarity that is genuinely rare.</p>
@@ -1499,7 +1533,7 @@
 
     <div class="pub-list">
       <a class="pub-item reveal" href="https://digifinland.fi/digilompakko-sotessa-todisteissa-piilee-suurin-hyoty/" target="_blank" rel="noopener noreferrer">
-        <div class="pub-title">DigiFinland -blogi: "Digilompakko sotessa: todisteissa piilee suurin hyöty"</div>
+        <div class="pub-title" lang="fi">DigiFinland -blogi: "Digilompakko sotessa: todisteissa piilee suurin hyöty"</div>
         <div class="pub-meta">
           <span>23.6.2026</span>
           <span class="pub-arrow">→</span>
@@ -1507,7 +1541,7 @@
       </a>
 
       <a class="pub-item reveal" href="https://ilkkapohjalainen.fi/yleisolta/omaolo-laittaa-turvallisuuden-aina-etusijalle" target="_blank" rel="noopener noreferrer">
-        <div class="pub-title">Ilkka-Pohjalainen: "Omaolo laittaa turvallisuuden aina etusijalle"</div>
+        <div class="pub-title" lang="fi">Ilkka-Pohjalainen: "Omaolo laittaa turvallisuuden aina etusijalle"</div>
         <div class="pub-meta">
           <span>23.1.2024</span>
           <span class="pub-arrow">→</span>
@@ -1515,7 +1549,7 @@
       </a>
 
       <a class="pub-item reveal" href="https://suomenkuvalehti.fi/uutisviikko/jopa-kolmasosa-hoitoalan-ammattilaisten-tyoajasta-menee-ei-hoidolliseen-tyohon-toisiko-tekoaly-satojen-miljoonien-saastot/" target="_blank" rel="noopener noreferrer">
-        <div class="pub-title">Suomen Kuvalehti: "Saako tekoäly vilkaista?"</div>
+        <div class="pub-title" lang="fi">Suomen Kuvalehti: "Saako tekoäly vilkaista?"</div>
         <div class="pub-meta">
           <span>11.1.2024</span>
           <span class="pub-arrow">→</span>
@@ -1523,7 +1557,7 @@
       </a>
 
       <a class="pub-item reveal" href="https://digifinland.fi/blogi-saumattomien-palveluprosessien-ja-yhteentoimivuuden-asialla/" target="_blank" rel="noopener noreferrer">
-        <div class="pub-title">DigiFinland -blogi: "Saumattomien palveluprosessien ja yhteentoimivuuden asialla"</div>
+        <div class="pub-title" lang="fi">DigiFinland -blogi: "Saumattomien palveluprosessien ja yhteentoimivuuden asialla"</div>
         <div class="pub-meta">
           <span>1.11.2023</span>
           <span class="pub-arrow">→</span>
@@ -1531,7 +1565,7 @@
       </a>
 
       <a class="pub-item reveal" href="https://mimmitkoodaa.fi/author/wilma-pietilainen/" target="_blank" rel="noopener noreferrer">
-        <div class="pub-title">Mimmit koodaa -blogi</div>
+        <div class="pub-title" lang="fi">Mimmit koodaa -blogi</div>
         <div class="pub-meta">
           <span>2.2.2022</span>
           <span class="pub-arrow">→</span>
@@ -1539,7 +1573,7 @@
       </a>
 
       <a class="pub-item reveal" href="https://www.theseus.fi/handle/10024/336915" target="_blank" rel="noopener noreferrer">
-        <div class="pub-title">Master Thesis: Käyttäjälähtöinen Omaolo-verkkokoulutus terveydenhuollon ammattilaisille</div>
+        <div class="pub-title">Master Thesis: <span lang="fi">Käyttäjälähtöinen Omaolo-verkkokoulutus terveydenhuollon ammattilaisille</span></div>
         <div class="pub-meta">
           <span>2020 · Thesis</span>
           <span class="pub-arrow">→</span>
@@ -1547,7 +1581,7 @@
       </a>
 
       <a class="pub-item reveal" href="https://www.theseus.fi/handle/10024/90946" target="_blank" rel="noopener noreferrer">
-        <div class="pub-title">Bachelor Thesis: Dialogisuus ryhmänohjauksessa</div>
+        <div class="pub-title">Bachelor Thesis: <span lang="fi">Dialogisuus ryhmänohjauksessa</span></div>
         <div class="pub-meta">
           <span>2015 · Thesis</span>
           <span class="pub-arrow">→</span>
@@ -1601,7 +1635,8 @@
         <textarea name="message" placeholder="What's on your mind?" required></textarea>
       </label>
       <button type="submit">Send message →</button>
-      <p class="contact-form-success" id="form-success">Thank you! I'll be in touch soon.</p>
+      <p class="contact-form-success" id="form-success" role="status">Thank you! I'll be in touch soon.</p>
+      <p class="contact-form-error" id="form-error" role="alert">Sending failed. Please try again, or email me directly at wilma.pietilainen@hotmail.com.</p>
     </form>
 
     <div class="contact-links reveal" style="margin-top: 3rem;">
@@ -1637,15 +1672,18 @@
     (function () {
       const slides = document.querySelectorAll('.testimonial-slide');
       const dotsContainer = document.getElementById('t-dots');
+      const track = document.querySelector('.testimonial-track');
       const total = slides.length;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       let current = 0;
-      let timer;
+      let timer = null;
 
       // Build dots
       slides.forEach((_, i) => {
         const d = document.createElement('button');
         d.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
         d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        if (i === 0) d.setAttribute('aria-current', 'true');
         d.addEventListener('click', () => goTo(i));
         dotsContainer.appendChild(d);
       });
@@ -1653,20 +1691,47 @@
       function goTo(n) {
         slides[current].classList.remove('active');
         dotsContainer.children[current].classList.remove('active');
+        dotsContainer.children[current].removeAttribute('aria-current');
         current = (n + total) % total;
         slides[current].classList.add('active');
         dotsContainer.children[current].classList.add('active');
+        dotsContainer.children[current].setAttribute('aria-current', 'true');
       }
 
-      function start() { timer = setInterval(() => goTo(current + 1), 11000); }
-      function stop()  { clearInterval(timer); }
+      // Autoplay never runs under prefers-reduced-motion, and the live region
+      // is silenced while slides rotate on their own so screen readers are not
+      // interrupted every 11 seconds.
+      function start() {
+        if (reduceMotion || timer) return;
+        timer = setInterval(() => goTo(current + 1), 11000);
+        track.setAttribute('aria-live', 'off');
+      }
+      function stop() {
+        clearInterval(timer);
+        timer = null;
+        track.setAttribute('aria-live', 'polite');
+      }
 
-      document.getElementById('t-prev').addEventListener('click', () => { stop(); goTo(current - 1); start(); });
-      document.getElementById('t-next').addEventListener('click', () => { stop(); goTo(current + 1); start(); });
+      // Manual navigation leaves autoplay stopped; it resumes when hover or
+      // focus leaves the carousel.
+      document.getElementById('t-prev').addEventListener('click', () => { stop(); goTo(current - 1); });
+      document.getElementById('t-next').addEventListener('click', () => { stop(); goTo(current + 1); });
 
       const carousel = document.getElementById('testimonial-carousel');
       carousel.addEventListener('mouseenter', stop);
       carousel.addEventListener('mouseleave', start);
+      carousel.addEventListener('focusin', stop);
+      carousel.addEventListener('focusout', (e) => {
+        if (!carousel.contains(e.relatedTarget)) start();
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          stop();
+        } else if (!carousel.matches(':hover') && !carousel.contains(document.activeElement)) {
+          start();
+        }
+      });
 
       start();
     })();
@@ -1674,15 +1739,23 @@
     // Contact form (Formspree AJAX)
     const contactForm = document.getElementById('contact-form');
     const formSuccess = document.getElementById('form-success');
+    const formError = document.getElementById('form-error');
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const data = new FormData(contactForm);
-      const res = await fetch(contactForm.action, {
-        method: 'POST', body: data, headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        contactForm.reset();
-        formSuccess.style.display = 'block';
+      formSuccess.style.display = 'none';
+      formError.style.display = 'none';
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST', body: new FormData(contactForm), headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          contactForm.reset();
+          formSuccess.style.display = 'block';
+        } else {
+          formError.style.display = 'block';
+        }
+      } catch (err) {
+        formError.style.display = 'block';
       }
     });
 
@@ -1690,13 +1763,15 @@
     const navToggle = document.getElementById('nav-toggle');
     const navLinks = document.getElementById('nav-links');
     navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
+      const open = navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
     });
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navToggle.classList.remove('open');
         navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
       });
     });
 

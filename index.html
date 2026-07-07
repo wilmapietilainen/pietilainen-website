@@ -603,7 +603,17 @@
       line-height: 1.75;
       text-wrap: pretty;
     }
+    #ai-practice {
+      background: var(--accent-light);
+    }
+    #ai-practice .skill-card {
+      border-color: var(--band-rule);
+    }
+    #ai-practice .skill-card:hover {
+      background: oklch(from var(--accent-light) calc(l - 0.05) c h);
+    }
     #ai-practice .skill-proof {
+      border-top-color: var(--band-rule);
       font-style: italic;
     }
     #ai-practice .skill-proof a {
@@ -985,6 +995,14 @@
       line-height: 1;
     }
 
+    .testimonial-attribution {
+      font-size: var(--text-sm);
+      color: var(--ink-soft);
+      font-style: normal;
+      margin-top: -1rem;
+      margin-bottom: 2rem;
+    }
+
     .testimonial-controls {
       display: flex;
       align-items: center;
@@ -1179,7 +1197,7 @@
     <ul class="nav-links" id="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#testimonials">Testimonials</a></li>
-      <li><a href="#experience">CV</a></li>
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#ai-practice">AI in Practice</a></li>
       <li><a href="#speaking">Speaking</a></li>
@@ -1193,7 +1211,7 @@
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-text">
-      <div class="hero-eyebrow">Portfolio</div>
+      <div class="hero-eyebrow">Digital Health × AI Strategy</div>
       <h1 class="hero-title">Strategy.<br><em>Empathy.</em><br>Action.</h1>
       <p class="hero-tagline">Strategic doer with a Swiss army knife mindset. I lead digital projects that don't just get planned, they get delivered.</p>
       <a href="#about" class="hero-cta">
@@ -1253,7 +1271,7 @@
 
       <div class="about-body reveal">
         <p>I connect the dots between business, technology and people with a background spanning product development, service design, digital health, and regulatory environments.</p>
-        <p>I lead digital projects that don't just get planned, they get delivered. My colleagues say I'm the kind of person who brings order to chaos and occasionally resembles MacGyver (minus the mullet); highly resourceful and innovative when it matters most.</p>
+        <p>My colleagues say I'm the kind of person who brings order to chaos and occasionally resembles MacGyver (minus the mullet); highly resourceful and innovative when it matters most, with a bias for seeing things through to delivery.</p>
         <p>My career began in nursing, where I learned the fundamentals of human-centred care and the open dialogue model. That foundation has shaped everything since: I build systems and services with the same careful attention to people that I once gave to patients.</p>
         <p>Increasingly, my work lives where digital health meets artificial intelligence. I am a hands-on, advanced user of AI. I build agents and workflows that augment how I think and decide, not tools that decide for me. Just as importantly, I care about how AI earns its place in care: ethically, transparently and within the bounds of the AI Act, data protection and security. Technology only matters if people can trust it.</p>
         <p>I believe in meaningful work, trusted teams and practical impact built with heart, not just process.</p>
@@ -1273,33 +1291,43 @@
       <div class="testimonial-track" aria-live="polite">
         <div class="testimonial-slide active">
           <p class="testimonial-quote" lang="fi">Wilman kanssa yhteistyö synnyttää aina jotain enemmän kuin osasi odottaa. Luotettava osaaja, jolla pysyy langat käsissä.</p>
+          <!-- <footer class="testimonial-attribution">Colleague, national digital health programme</footer> -->
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-quote">Wilma distills complex issues into clear, actionable insights. She excels at grasping the big picture while keeping a sharp focus on what matters most.</p>
+          <!-- <footer class="testimonial-attribution">Colleague, national digital health programme</footer> -->
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-quote">Wilma combines creative problem-solving, clear decision-making, and an empathetic approach. Her ability to develop her team makes her a truly valuable leader.</p>
+          <!-- <footer class="testimonial-attribution">Colleague, national digital health programme</footer> -->
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-quote" lang="fi">Wilma on yksi visionäärisimmistä ammattilaisista, joita olen tavannut. Hän kykenee viemään kehitystyön sekä strategiselle että operatiiviselle tasolle.</p>
+          <!-- <footer class="testimonial-attribution">Colleague, national digital health programme</footer> -->
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-quote" lang="fi">Wilma on häkellyttävän tarkka erottamaan oleellisen epäoleellisesta. Hänen johtamistyylinsä rauhoittaa tekemistä myös kuumimmissa projektitilanteissa.</p>
+          <!-- <footer class="testimonial-attribution">Colleague, national digital health programme</footer> -->
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-quote">Wilma has exceptional technical understanding and the ability to translate it into practical solutions. Her natural leadership consistently produces high-quality results.</p>
+          <!-- <footer class="testimonial-attribution">Colleague, national digital health programme</footer> -->
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-quote">Wilma is never afraid to challenge existing processes with their own ideas. Working with her is a genuine pleasure.</p>
+          <!-- <footer class="testimonial-attribution">Colleague, national digital health programme</footer> -->
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-quote">Wilma is your go-to person when a project needs to be handled efficiently, with sensitivity and modern values. Her passion for polishing the best version out of anything is unmatched.</p>
+          <!-- <footer class="testimonial-attribution">Colleague, national digital health programme</footer> -->
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-quote" lang="fi">Wilma ymmärtää sekä liiketoiminnan tarpeet että teknisen toteutuksen realiteetit, mikä tekee hänestä poikkeuksellisen kumppanin monimutkaisissa digitalisaatiohankkeissa.</p>
+          <!-- <footer class="testimonial-attribution">Colleague, national digital health programme</footer> -->
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-quote">Wilma combines strategic thinking with hands-on execution, and does so with an empathy and clarity that is genuinely rare.</p>
+          <!-- <footer class="testimonial-attribution">Colleague, national digital health programme</footer> -->
         </div>
       </div>
 
@@ -1372,7 +1400,7 @@
         <div class="exp-content">
           <div class="exp-title">Product Manager (Omaolo), PRRC</div>
           <p class="exp-desc">Fast-tracked from specialist to product owner within two years. Led the strategic development of Omaolo, a nationally used MDR IIa regulated digital health service. Orchestrated over 20 successful product releases and managed a vendor ecosystem of 80+ experts.</p>
-          <span class="exp-highlight">20+ releases · 80-person ecosystem · MDR IIa compliance</span>
+          <span class="exp-highlight">80-person ecosystem · MDR IIa compliance</span>
         </div>
       </div>
 
@@ -1450,7 +1478,7 @@
         </div>
         <div class="skill-name">Customer-Centric Value Creation</div>
         <div class="skill-desc">I don't deliver what's asked. I clarify what's needed. Deep customer understanding is my compass: I gather insight, synthesise it into strategy and use it to build offerings that create lasting value for users and clients alike.</div>
-        <div class="skill-proof">Spearheaded a customer service redesign that shifted NPS from −10 to +24; contributed to a +34-point NPS shift overall.</div>
+        <div class="skill-proof">Spearheaded a customer service redesign that contributed to a +34-point NPS shift overall.</div>
       </div>
 
       <div class="skill-card skill-anchor reveal">
@@ -1458,7 +1486,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>
         </div>
         <div class="skill-name">Applied &amp; Responsible AI</div>
-        <div class="skill-desc">I do not just advise on AI, I build with it, and I hold it to the same standard as any regulated medical device.</div>
+        <div class="skill-desc">AI held to the same standard as any regulated medical device: built hands-on, governed like it matters.</div>
         <div class="skill-proof">A PRRC mindset, hands-on building, and AI as a thinking partner.</div>
       </div>
     </div>

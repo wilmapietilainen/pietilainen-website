@@ -626,12 +626,16 @@
     #ai-practice .skill-card:hover {
       background: oklch(from var(--accent-light) calc(l - 0.05) c h);
     }
+    #ai-practice .section-number,
+    #ai-practice .skill-proof,
+    #ai-practice .skill-proof a {
+      color: oklch(from var(--accent) calc(l - 0.08) c h);
+    }
     #ai-practice .skill-proof {
       border-top-color: var(--band-rule);
       font-style: italic;
     }
     #ai-practice .skill-proof a {
-      color: var(--accent);
       text-decoration: underline;
       text-underline-offset: 2px;
       transition: opacity 0.2s;

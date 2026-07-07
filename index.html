@@ -72,6 +72,11 @@
       --on-dark-faint: oklch(55% 0.02 150);
       --error: oklch(72% 0.16 30);
       --shadow: oklch(0% 0 0 / 0.07);
+      --text-xs: 0.72rem;
+      --text-sm: 0.8rem;
+      --text-base: 0.95rem;
+      --text-md: 1.15rem;
+      --text-lg: 1.5rem;
       --serif: 'DM Serif Display', Georgia, serif;
       --sans: 'DM Sans', Helvetica, Arial, sans-serif;
     }
@@ -422,7 +427,7 @@
     }
 
     .about-contacts a {
-      font-size: 0.85rem;
+      font-size: var(--text-sm);
       color: var(--ink-soft);
       text-decoration: none;
       transition: color 0.2s;
@@ -433,7 +438,7 @@
     .about-contacts a:hover { color: var(--accent); }
 
     .about-body p {
-      font-size: 1.15rem;
+      font-size: var(--text-md);
       line-height: 1.8;
       color: var(--ink);
       font-weight: 300;
@@ -488,7 +493,7 @@
     }
 
     .exp-company {
-      font-size: 0.85rem;
+      font-size: var(--text-sm);
       color: var(--on-dark-soft);
       line-height: 1.4;
     }
@@ -504,16 +509,16 @@
     }
 
     .exp-desc {
-      font-size: 0.9rem;
+      font-size: var(--text-base);
       color: var(--on-dark-soft);
       line-height: 1.7;
-      font-weight: 300;
+      font-weight: 400;
       max-width: 65ch;
     }
 
     .exp-highlight {
       display: inline-block;
-      font-size: 0.78rem;
+      font-size: var(--text-sm);
       font-weight: 500;
       color: var(--accent);
       margin-top: 0.75rem;
@@ -562,7 +567,7 @@
     }
 
     .skill-desc {
-      font-size: 0.85rem;
+      font-size: var(--text-base);
       color: var(--ink-soft);
       line-height: 1.65;
       font-weight: 300;
@@ -572,7 +577,7 @@
       margin-top: 1rem;
       padding-top: 1rem;
       border-top: 1px solid var(--rule);
-      font-size: 0.78rem;
+      font-size: var(--text-sm);
       color: var(--accent);
       font-weight: 500;
       line-height: 1.55;
@@ -590,7 +595,7 @@
 
     /* AI IN PRACTICE */
     .section-ingress {
-      font-size: 1.05rem;
+      font-size: var(--text-md);
       color: var(--ink-soft);
       font-weight: 300;
       max-width: 62ch;
@@ -637,9 +642,9 @@
     }
 
     .speaking-cta p {
-      font-size: 0.9rem;
+      font-size: var(--text-base);
       color: var(--on-dark-soft);
-      font-weight: 300;
+      font-weight: 400;
       max-width: 55ch;
     }
 
@@ -704,10 +709,10 @@
     }
 
     .talk-desc {
-      font-size: 0.88rem;
+      font-size: var(--text-base);
       color: var(--on-dark-soft);
       line-height: 1.7;
-      font-weight: 300;
+      font-weight: 400;
       max-width: 65ch;
     }
 
@@ -800,7 +805,7 @@
     }
 
     .edu-school {
-      font-size: 0.85rem;
+      font-size: var(--text-sm);
       color: var(--ink-soft);
       font-weight: 300;
     }
@@ -841,10 +846,10 @@
     }
 
     .contact-sub {
-      font-size: 1rem;
+      font-size: var(--text-base);
       color: var(--on-dark-soft);
       max-width: 48ch;
-      font-weight: 300;
+      font-weight: 400;
       margin-bottom: 3rem;
     }
 
@@ -900,7 +905,7 @@
       border-radius: 2px;
       padding: 0.85rem 1rem;
       font-family: var(--sans);
-      font-size: 0.95rem;
+      font-size: var(--text-base);
       font-weight: 300;
       color: var(--on-dark);
       outline: none;
@@ -1045,7 +1050,7 @@
     }
 
     .contact-form-success {
-      font-size: 0.9rem;
+      font-size: var(--text-base);
       color: var(--accent);
       font-weight: 500;
       letter-spacing: 0.05em;
@@ -1054,7 +1059,7 @@
     }
 
     .contact-form-error {
-      font-size: 0.9rem;
+      font-size: var(--text-base);
       color: var(--error);
       font-weight: 500;
       letter-spacing: 0.05em;
@@ -1079,7 +1084,7 @@
     }
 
     .footer-langs {
-      font-size: 0.75rem;
+      font-size: var(--text-xs);
       color: var(--on-dark-faint);
       letter-spacing: 0.08em;
     }

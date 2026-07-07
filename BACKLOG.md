@@ -15,3 +15,4 @@ Priorisoidut kehityskohteet, arvioitu 4.7.2026. Päivitä tätä listaa kun koht
 - [ ] Testimonialeihin attribuutio (rooli/konteksti), sitaatit ovat nyt anonyymejä. Jokaisen sitaatin alle on lisätty kommentoitu `<footer class="testimonial-attribution">` placeholder (index.html, tyyliin "Colleague, national digital health programme"); poista kommentti ja täytä oikea rooli/konteksti kun tiedot on saatu, älä keksi nimiä tai rooleja. Käyttäjä haluaa harkita tätä vielä; tehdään viimeisenä.
 - [ ] Harkittavaksi: privacy-first-analytiikka (Plausible/GoatCounter), ei evästebanneria
 - [ ] Harkittavaksi: "(in Finnish)"-merkintä suomenkielisiin julkaisulinkkeihin
+- [ ] Harkittavaksi: oma domain-sähköposti (esim. wilma@wilmapietilainen.com) nykyisen wilma.pietilainen@hotmail.com -osoitteen sijaan; vaikuttaa index.html:n mailto-linkkeihin, JSON-LD:hen ja Formspree-lomakkeen virheviestiin

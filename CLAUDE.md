@@ -4,7 +4,7 @@ Ohjeet Claude Codelle tässä repossa.
 
 ## Projekti
 
-- Wilma Pietiläisen henkilökohtainen portfoliosivusto: yksi staattinen `index.html` + `photo.png`. Ei build-vaihetta, ei riippuvuuksia, ei frameworkia.
+- Wilma Pietiläisen henkilökohtainen portfoliosivusto: yksi staattinen `index.html` + kuvat (`photo.jpg` heron kuva, `og-image.jpg` jakoesikatselu, faviconit). Ei build-vaihetta, ei riippuvuuksia, ei frameworkia.
 - Julkinen repo `wilmapietilainen/pietilainen-website`. Vercel julkaisee `main`-haaran osoitteessa wilmapietilainen.com. **Push mainiin = julkaisu tuotantoon.**
 
 ## Työskentelytavat
@@ -24,7 +24,7 @@ Ohjeet Claude Codelle tässä repossa.
 ## Sivun rakenne (index.html)
 
 - Osiot numeroitu 01-08: About, Testimonials, Experience, Core Skills, AI in Practice, Speaking, Featured In, Education. Lisäksi hero, Contact ja footer. Jos osioita lisätään tai poistetaan, numerointi ja ylävalikko päivitetään juoksevaksi.
-- Hero: tumma (`--bg-dark`) osio, jossa kuva on oikeassa reunassa täysikorkuisena ja häivytetään maskilla vasemmalle ja alas (ei näkyviä reunoja), magentahehku kuvan takana ja vinjetti kuvan päällä. Porrastettu sisääntulokoreografia (teksti, kuva) ja Ken Burns -efekti kuvassa. Navi on heron kohdalla läpinäkyvä ja vaaleatekstinen ja saa vaalean taustan (`nav.scrolled`), kun heron ohi on vieritetty. Heron canvas-animaatio poistettiin tietoisesti rohkean värimaailman tieltä.
+- Hero: tumma (`--bg-dark`) osio, jossa kuva on oikeassa reunassa täysikorkuisena ja häivytetään maskilla vasemmalle ja alas (ei näkyviä reunoja), magentahehku kuvan takana ja vinjetti kuvan päällä. Nopea porrastettu sisääntulokoreografia (teksti, kuva, kokonaiskesto noin 1,2 s) ja Ken Burns -efekti kuvassa. Sisääntulo käynnistyy vasta, kun fontit ja kuva ovat valmiit (`hero-in`-luokka `<html>`-elementissä), jottei otsikko vilahda väärällä fontilla eikä kuva ponnahda esiin; `<head>`-skriptin 1,2 s varmistus näyttää sisällön aina. Älä pidennä viiveitä: sivun pitää tuntua nopealta, ei hitaasti latautuvalta. Navi on heron kohdalla läpinäkyvä ja vaaleatekstinen ja saa vaalean taustan (`nav.scrolled`), kun heron ohi on vieritetty. Heron canvas-animaatio poistettiin tietoisesti rohkean värimaailman tieltä.
 - Favicon: Double Diamond -kaksoistimantti (service design -viittaus). Tiedostot `favicon-v3.svg`, `favicon-v3.png` ja `apple-touch-icon-v3.png`; vaihda versionumeroa tiedostonimessä aina kun ikoni muuttuu, koska selaimet cachettavat faviconit sitkeästi.
 - Core Skills: kuusi korttia 3+3-ruudukossa + täysleveä "Applied & Responsible AI" -ankkurikortti. Sama ohut aaltokaistale (uudelleenkäytettävä `runCurrents`-funktio scriptin lopussa, optioilla `lines: 7, converge: false, opacityScale: 0.7`) toistuu ankkurikortin alareunassa (`#anchor-wave`) ja Contact-osion yläreunassa (`#contact-wave`).
 - Testimonials: karuselli, automaattivaihto 11 s, pysähtyy hoveriin.

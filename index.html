@@ -50,6 +50,10 @@
     ]
   }
   </script>
+  <script>
+    document.documentElement.classList.add('js');
+    setTimeout(function () { document.documentElement.classList.add('hero-in'); }, 1200);
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -308,27 +312,36 @@
       to   { opacity: 1; transform: none; }
     }
 
-    /* Entrance choreography: the text cascades in first,
-       then the photo settles in last. */
+    /* Entrance choreography: a quick cascade, text first and the photo
+       settling in right behind it. It starts once fonts and the photo
+       are ready (html.hero-in), so nothing flashes or pops in. */
     .hero-eyebrow {
-      animation: fadeInUp 0.7s ease both;
-      animation-delay: 0.5s;
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.05s;
     }
     .hero-title {
-      animation: fadeInUp 0.7s ease both;
-      animation-delay: 0.65s;
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.15s;
     }
     .hero-tagline {
-      animation: fadeInUp 0.7s ease both;
-      animation-delay: 0.8s;
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.27s;
     }
     .hero-cta {
-      animation: fadeInUp 0.7s ease both;
-      animation-delay: 0.95s;
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.39s;
     }
     .hero-photo {
-      animation: photoIn 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
-      animation-delay: 1.15s;
+      animation: photoIn 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 0.2s;
+    }
+    .js:not(.hero-in) .hero-eyebrow,
+    .js:not(.hero-in) .hero-title,
+    .js:not(.hero-in) .hero-tagline,
+    .js:not(.hero-in) .hero-cta,
+    .js:not(.hero-in) .hero-photo {
+      animation: none;
+      opacity: 0;
     }
 
     @keyframes kenBurns {
@@ -1241,9 +1254,10 @@
   <section id="hero" tabindex="-1">
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-photo">
-      <img src="photo.webp"
+      <img src="photo.jpg"
            alt="Wilma Pietiläinen"
-           width="1100" height="1430">
+           width="1100" height="1430"
+           fetchpriority="high">
       <div class="hero-photo-vignette" aria-hidden="true"></div>
     </div>
     <div class="hero-text">
@@ -1758,6 +1772,25 @@
   </footer>
 
   <script>
+    // Start the hero entrance once fonts and the photo are ready (failsafe in <head>)
+    (function () {
+      const heroImg = document.querySelector('.hero-photo img');
+      const fontsReady = document.fonts
+        ? Promise.all([
+            document.fonts.load('400 1em "DM Serif Display"'),
+            document.fonts.load('italic 400 1em "DM Serif Display"'),
+            document.fonts.load('300 1em "DM Sans"'),
+            document.fonts.load('500 1em "DM Sans"')
+          ])
+        : Promise.resolve();
+      Promise.race([
+        Promise.all([fontsReady, heroImg.decode()]),
+        new Promise(function (resolve) { setTimeout(resolve, 800); })
+      ]).catch(function () {}).then(function () {
+        document.documentElement.classList.add('hero-in');
+      });
+    })();
+
     // Footer copyright year
     document.getElementById('footer-year').textContent = new Date().getFullYear();
 
